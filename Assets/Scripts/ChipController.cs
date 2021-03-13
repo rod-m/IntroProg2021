@@ -11,7 +11,7 @@ public class ChipController : MonoBehaviour
     // how fast can it move
     public float moveSpeed = 5f;
     public Transform rayFrom;    // detect ray from here
-    public LayerMask dontRayCastOn;  // use this layer stop stop ray testing yourself!
+    public LayerMask rayCastOn;  // use this layer stop stop ray testing yourself!
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -25,7 +25,7 @@ public class ChipController : MonoBehaviour
         
       
         // test for any hits
-        RaycastHit2D hit = Physics2D.Raycast( rayFrom.position, forward, rayDistance);
+        RaycastHit2D hit = Physics2D.Raycast( rayFrom.position, forward, rayDistance, rayCastOn);
         if (hit.collider != null)
         {
             Debug.Log($"Hit {hit.collider.name}");

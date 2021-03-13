@@ -5,7 +5,12 @@ using UnityEngine;
 public class ChipController : MonoBehaviour
 {
     private Rigidbody2D rb;
-    public float turnSpeed = 5f;
+    // use the turn speed for its rotation scanning
+    public float turnSpeed = 30f;
+    public float rayDistance = 6f;
+    // how fast can it move
+    public float moveSpeed = 5f;
+    public Transform rayFrom;    
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -15,8 +20,21 @@ public class ChipController : MonoBehaviour
     void Update()
     {
         rb.angularVelocity = turnSpeed;
-        // draw a green debug ray
-        Vector3 forward = transform.TransformDirection(Vector3.up) * 10;
-        Debug.DrawRay(transform.position, forward, Color.green);
+        Vector3 forward = transform.TransformDirection(Vector3.up) * rayDistance; 
+        
+      
+        // test for any hits
+        RaycastHit2D hit = Physics2D.Raycast( rayFrom.position, forward, rayDistance);
+        if (hit.collider != null)
+        {
+            Debug.Log($"Hit {hit.collider.name}");
+            // draw red if hit
+            Debug.DrawRay( rayFrom.position, forward, Color.red);
+        }
+        else
+        {
+           // draws green if no hit
+            Debug.DrawRay( rayFrom.position, forward, Color.green);
+        }
     }
 }

@@ -15,7 +15,7 @@ public class ChipController : MonoBehaviour
     void Update()
     {
         rb.angularVelocity = turnSpeed;
-        
+        // draw a green debug ray
         Vector3 forward = transform.TransformDirection(Vector3.up) * 10;
         Debug.DrawRay(transform.position, forward, Color.green);
     }

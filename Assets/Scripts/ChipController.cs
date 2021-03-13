@@ -10,7 +10,8 @@ public class ChipController : MonoBehaviour
     public float rayDistance = 6f;
     // how fast can it move
     public float moveSpeed = 5f;
-    public Transform rayFrom;    
+    public Transform rayFrom;    // detect ray from here
+    public LayerMask dontRayCastOn;  // use this layer stop stop ray testing yourself!
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();

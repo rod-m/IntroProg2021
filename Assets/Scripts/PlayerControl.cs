@@ -6,7 +6,15 @@ public class PlayerControl : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (Input.GetMouseButtonDown(0)) {     // Mouse clicked
+        if (Input.GetButtonDown("Fire1"))
+        {
+            Vector3 mousePos = Input.mousePosition;
+            {
+                Debug.Log(mousePos.x);
+                Debug.Log(mousePos.y);
+            }
+        }
+        if (Input.GetButtonDown("Fire1")){ //if (Input.GetMouseButtonDown(0)) {     // Mouse clicked
             Vector2 mouseLoc = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             RaycastHit2D hit = Physics2D.Raycast(mouseLoc, Vector2.zero);
             if (hit.collider != null) {

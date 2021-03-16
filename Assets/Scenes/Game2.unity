@@ -48197,9 +48197,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chipstate: 0
-  turnSpeed: 12
+  turnSpeed: 20
   rayDistance: 6
-  moveSpeed: 5
+  moveSpeed: 1.5
   rayFrom: {fileID: 133559507}
   rayCastOn:
     serializedVersion: 2

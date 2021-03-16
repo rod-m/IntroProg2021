@@ -43,7 +43,8 @@ public class ChipController : MonoBehaviour
     void Clean()
     {
         rb.AddForce(transform.up * moveSpeed);
-     
+        if(rb.velocity.magnitude > moveSpeed)
+            rb.velocity = rb.velocity.normalized * moveSpeed;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -63,6 +64,7 @@ public class ChipController : MonoBehaviour
     {
         rb.angularVelocity = turnSpeed;
         Vector3 forward = transform.TransformDirection(Vector3.up) * rayDistance;
+        rb.velocity = transform.up * 0.3f;
         // test for any hits
         RaycastHit2D hit = Physics2D.Raycast( rayFrom.position, forward, rayDistance, rayCastOn);
         if (hit.collider != null)

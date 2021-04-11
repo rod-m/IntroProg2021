@@ -42,9 +42,11 @@ public class ChipController : MonoBehaviour
 
     void Clean()
     {
-        rb.AddForce(transform.up * moveSpeed);
+        rb.AddForce(transform.up * (moveSpeed * Time.fixedDeltaTime));
         if(rb.velocity.magnitude > moveSpeed)
             rb.velocity = rb.velocity.normalized * moveSpeed;
+        
+        Debug.DrawRay( rayFrom.position, transform.up * rayDistance, Color.white);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -72,6 +74,7 @@ public class ChipController : MonoBehaviour
             Debug.Log($"Hit {hit.collider.name}");
             // draw red if hit
             Debug.DrawRay( rayFrom.position, forward, Color.red);
+            rb.angularVelocity = 0;
             chipstate = ChipStates.CLEAN;
         }
         else

@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
@@ -16,10 +17,33 @@ public class ChipPlayerController : MonoBehaviour
     public float turnSpeed = 30f;
 
     public float moveSpeed = 5f;
+    public float rayDistance = 6f;
+    public LayerMask rayCastOn;
 
+    public Transform explosion;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+    }
+
+    private void Update()
+    {
+        // shoot the other chip for some reason
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Debug.DrawRay( transform.position, transform.up * rayDistance, Color.white);
+            RaycastHit2D hit = Physics2D.Raycast( transform.position, transform.up, rayDistance, rayCastOn);
+            if (hit.collider != null)
+            {
+                Debug.Log($"Hit {hit.collider.name}");
+                // draw red if hit
+                Debug.DrawRay( transform.position, transform.up * rayDistance, Color.red);
+                Transform _explosion = Instantiate(explosion, hit.collider.transform.position, Quaternion.identity);
+                Destroy(hit.collider.gameObject);
+                Destroy(_explosion.gameObject, 3f);
+              
+            }
+        }
     }
 
     private void FixedUpdate()

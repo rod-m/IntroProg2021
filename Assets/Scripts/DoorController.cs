@@ -1,18 +1,18 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class DoorController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private void OnCollisionEnter2D(Collision2D other)
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        if (other.collider.CompareTag("Player"))
+        {
+            if (GameController.Instance.UseKey())
+            {
+                Destroy(gameObject); // has key, open door, can be animation!
+            }
+        }
     }
 }

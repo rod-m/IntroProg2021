@@ -33,6 +33,23 @@ public class GameController : MonoBehaviour
     public void AddKey()
     {
         keysCollected++;
+        hudController.SetKeys("Keys " + keysCollected);
         Debug.Log("Keys collected " + keysCollected);
+    }
+
+    public bool UseKey()
+    {
+        if (keysCollected > 0)
+        {
+            keysCollected--;
+            return true;
+        }
+        return false;
+    }
+
+    public void SaveGame()
+    {
+        PlayerPrefs.SetInt("Score", playerScore);
+        playerScore = PlayerPrefs.GetInt("Score");
     }
 }
